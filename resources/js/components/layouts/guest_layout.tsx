@@ -4,7 +4,7 @@ import Navbar from '../navbar';
 
 export default function GuestLayout({ children, title }: { children: ReactNode; title: string }) {
     return (
-        <main>
+        <main className="bg-slate-100">
             <Head title={title}>
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link

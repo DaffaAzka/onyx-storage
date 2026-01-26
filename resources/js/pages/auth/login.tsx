@@ -1,8 +1,37 @@
+import LoadingButton from '@/components/button_loading';
 import InputForm from '@/components/input_form';
 import GuestLayout from '@/components/layouts/guest_layout';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { router, usePage } from '@inertiajs/react';
+import { useState } from 'react';
 export default function LoginPage() {
+    const { errors } = usePage().props;
+
+    const [loading, setLoading] = useState(false);
+
+    const [values, setValues] = useState({
+        email: null,
+        password: null,
+    });
+
+    function handleChange(e: { target: { id: any; value: any } }) {
+        setValues((values: any) => ({
+            ...values,
+            [e.target.id]: e.target.value,
+        }));
+    }
+
+    function handleSubmit(e: any) {
+        e.preventDefault();
+        setLoading(true);
+
+        router.post('/login', values, {
+            onFinish: () => {
+                setLoading(false);
+            },
+        });
+    }
+
     return (
         <GuestLayout title="Login">
             <div className="flex min-h-screen w-full items-center justify-center">
@@ -11,15 +40,12 @@ export default function LoginPage() {
                         <CardTitle className="text-center">Continue to Sign In</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="flex flex-col gap-5">
-                            <InputForm name="email" text="Email Address" type="email" />
-                            <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-                                <InputForm name="password" text="Password" type="password" />
-                                <InputForm name="retry_password" text="Retype Password" type="password" />
-                            </div>
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                            <InputForm handleChange={handleChange} name="email" text="Email Address" type="email" error={errors.email} />
+                            <InputForm handleChange={handleChange} name="password" text="Password" type="password" error={errors.password} />
 
-                            <Button>Sign In</Button>
-                        </div>
+                            <LoadingButton type="submit" text="Sign In" loading={loading} />
+                        </form>
                     </CardContent>
                 </Card>
             </div>

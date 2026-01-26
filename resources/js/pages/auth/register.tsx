@@ -1,6 +1,6 @@
+import LoadingButton from '@/components/button_loading';
 import InputForm from '@/components/input_form';
 import GuestLayout from '@/components/layouts/guest_layout';
-import { Button } from '@/components/ui/button';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { router, usePage } from '@inertiajs/react';
@@ -60,7 +60,7 @@ export default function RegisterPage() {
                                     />
                                 </div>
 
-                                <Button type="submit">Sign Up</Button>
+                                <LoadingButton text="Register" type="submit" loading={loading} />
                             </form>
                         </CardContent>
                     </Card>
