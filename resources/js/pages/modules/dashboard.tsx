@@ -1,7 +1,9 @@
+import AuthLayout from '@/components/layouts/auth_layout';
+
 export default function DahsboardPage() {
     return (
-        <>
-            <h1>Ini Dashboard harus login</h1>
-        </>
+        <AuthLayout title="Dashboard">
+            <h1>Testing Sidebar</h1>
+        </AuthLayout>
     );
 }

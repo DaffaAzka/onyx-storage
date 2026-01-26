@@ -34,7 +34,7 @@ export default function LoginPage() {
 
     return (
         <GuestLayout title="Login">
-            <div className="flex min-h-screen w-full items-center justify-center">
+            <div className="flex min-h-screen w-full items-center justify-center px-4 md:px-0">
                 <Card className="mb-12 w-full max-w-xl">
                     <CardHeader>
                         <CardTitle className="text-center text-xl">Sign In</CardTitle>
@@ -46,7 +46,7 @@ export default function LoginPage() {
 
                             <div className="flex flex-col gap-3">
                                 <LoadingButton text="Continue to Sign In" type="submit" loading={loading} />
-                                <p className="text-center text-sm">
+                                <p className="text-center text-xs md:text-sm">
                                     Didn't have an account?{' '}
                                     <Link className="text-blue-400 underline" href={'/register'}>
                                         Sign up here!

@@ -38,7 +38,7 @@ export default function RegisterPage() {
     return (
         <>
             <GuestLayout title="Register">
-                <div className="flex min-h-screen w-full items-center justify-center">
+                <div className="flex min-h-screen w-full items-center justify-center px-4 md:px-0">
                     <Card className="mb-12 w-full max-w-xl">
                         <CardHeader>
                             <CardTitle className="text-center text-xl">Sign Up</CardTitle>
@@ -62,7 +62,7 @@ export default function RegisterPage() {
 
                                 <div className="flex flex-col gap-3">
                                     <LoadingButton text="Continue to Sign Up" type="submit" loading={loading} />
-                                    <p className="text-center text-sm">
+                                    <p className="text-center text-xs md:text-sm">
                                         Already have an account?{' '}
                                         <Link className="text-blue-400 underline" href={'/login'}>
                                             Sign in here!

@@ -69,4 +69,5 @@ class AuthController extends Controller
     {
         return Inertia::render("modules/dashboard");
     }
+
 }
