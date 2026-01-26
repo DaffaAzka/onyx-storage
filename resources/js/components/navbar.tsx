@@ -1,22 +1,27 @@
+import { Button } from '@/components/ui/button';
 import { Link } from '@inertiajs/react';
-import { Button } from './ui/button';
 
-export default function Navbar() {
+const Navbar = () => {
     return (
-        <div className="fixed flex w-full content-center items-center justify-between bg-purple-900 p-4 text-white">
-            <div>
-                <Link href={'/'} className="text-xl font-bold">
-                    Onyx Storage
-                </Link>
+        <nav className="fixed h-16 w-full border-b bg-background">
+            <div className="mx-auto flex h-full max-w-(--breakpoint-xl) items-center justify-between px-4 sm:px-6 lg:px-8">
+                <div>
+                    <Link href={'/'} className="font-semibold">
+                        Onyx Storage
+                    </Link>
+                </div>
+
+                <div className="flex items-center gap-3">
+                    <Button className="hidden sm:inline-flex" variant="outline" asChild>
+                        <Link href={'/login'}>Sign In</Link>
+                    </Button>
+                    <Button asChild>
+                        <Link href={'/register'}>Get Started</Link>
+                    </Button>
+                </div>
             </div>
-            <div className="flex flex-wrap items-center gap-2 md:flex-row">
-                <Button variant={'secondary'} asChild>
-                    <Link href={'/login'}>Login</Link>
-                </Button>
-                <Button variant={'default'} asChild>
-                    <Link href={'/register'}>Register</Link>
-                </Button>
-            </div>
-        </div>
+        </nav>
     );
-}
+};
+
+export default Navbar;

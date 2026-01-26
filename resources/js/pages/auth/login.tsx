@@ -2,7 +2,7 @@ import LoadingButton from '@/components/button_loading';
 import InputForm from '@/components/input_form';
 import GuestLayout from '@/components/layouts/guest_layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { router, usePage } from '@inertiajs/react';
+import { Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 export default function LoginPage() {
     const { errors } = usePage().props;
@@ -37,14 +37,22 @@ export default function LoginPage() {
             <div className="flex min-h-screen w-full items-center justify-center">
                 <Card className="mb-12 w-full max-w-xl">
                     <CardHeader>
-                        <CardTitle className="text-center">Continue to Sign In</CardTitle>
+                        <CardTitle className="text-center text-xl">Sign In</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                             <InputForm handleChange={handleChange} name="email" text="Email Address" type="email" error={errors.email} />
                             <InputForm handleChange={handleChange} name="password" text="Password" type="password" error={errors.password} />
 
-                            <LoadingButton type="submit" text="Sign In" loading={loading} />
+                            <div className="flex flex-col gap-3">
+                                <LoadingButton text="Continue to Sign In" type="submit" loading={loading} />
+                                <p className="text-center text-sm">
+                                    Didn't have an account?{' '}
+                                    <Link className="text-blue-400 underline" href={'/register'}>
+                                        Sign up here!
+                                    </Link>
+                                </p>
+                            </div>
                         </form>
                     </CardContent>
                 </Card>

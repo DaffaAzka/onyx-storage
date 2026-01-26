@@ -3,7 +3,7 @@ import InputForm from '@/components/input_form';
 import GuestLayout from '@/components/layouts/guest_layout';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { router, usePage } from '@inertiajs/react';
+import { Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function RegisterPage() {
@@ -41,7 +41,7 @@ export default function RegisterPage() {
                 <div className="flex min-h-screen w-full items-center justify-center">
                     <Card className="mb-12 w-full max-w-xl">
                         <CardHeader>
-                            <CardTitle className="text-center">Continue to Sign Up</CardTitle>
+                            <CardTitle className="text-center text-xl">Sign Up</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
@@ -60,7 +60,15 @@ export default function RegisterPage() {
                                     />
                                 </div>
 
-                                <LoadingButton text="Register" type="submit" loading={loading} />
+                                <div className="flex flex-col gap-3">
+                                    <LoadingButton text="Continue to Sign Up" type="submit" loading={loading} />
+                                    <p className="text-center text-sm">
+                                        Already have an account?{' '}
+                                        <Link className="text-blue-400 underline" href={'/login'}>
+                                            Sign in here!
+                                        </Link>
+                                    </p>
+                                </div>
                             </form>
                         </CardContent>
                     </Card>

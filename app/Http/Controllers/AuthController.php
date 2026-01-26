@@ -55,9 +55,8 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Invalid credentials',
+            'email' => 'Invalid credentials.',
         ]);
-
     }
 
     function logout(Request $request)
