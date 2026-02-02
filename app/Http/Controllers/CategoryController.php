@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('user')->get();
+        $categories = Category::with('user')->latest()->paginate(10);
         return Inertia::render("modules/categories/categories", ["categories" => $categories]);
     }
 

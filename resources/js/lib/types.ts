@@ -15,3 +15,13 @@ export type Category = {
     created_at: Date;
     updated_at: Date;
 };
+
+export interface PaginatedData<T> {
+    data: T[];
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
+    from: number;
+    to: number;
+}
