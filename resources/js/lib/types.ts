@@ -25,3 +25,9 @@ export interface PaginatedData<T> {
     from: number;
     to: number;
 }
+
+export enum Actions {
+    UPDATE = 'UPDATE',
+    DETAIL = 'DETAIL',
+    DELETE = 'DELETE',
+}

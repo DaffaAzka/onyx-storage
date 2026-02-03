@@ -1,15 +1,28 @@
 import InputForm from '@/components/input_form';
 import TextareaForm from '@/components/textarea_form';
 import { Dialog, DialogContent, DialogDescription, DialogHeader } from '@/components/ui/dialog';
-import { Category } from '@/lib/types';
+import { Actions, Category } from '@/lib/types';
 import { DialogTitle } from '@radix-ui/react-dialog';
 import { useEffect, useState } from 'react';
 
-export default function DetailModal({ category, isOpen, onClose }: { category: Category; isOpen: boolean; onClose: () => void }) {
+export default function ActionModal({
+    category,
+    isOpen,
+    action,
+    onClose,
+}: {
+    category: Category;
+    isOpen: boolean;
+    action: Actions;
+    onClose: () => void;
+}) {
     const [values, setValues] = useState({
         name: '',
         description: '',
     });
+
+    const [disabled, setDisabled] = useState(false);
+    const [title, setTitle] = useState('');
 
     useEffect(() => {
         if (category) {
@@ -18,7 +31,26 @@ export default function DetailModal({ category, isOpen, onClose }: { category: C
                 description: category.description,
             });
         }
-    }, [category.id]);
+
+        setDisabled(action === Actions.DETAIL || action === Actions.DELETE);
+
+        switch (action) {
+            case Actions.DETAIL:
+                setTitle('Detail category');
+                break;
+
+            case Actions.DELETE:
+                setTitle('Delete category');
+                break;
+
+            case Actions.UPDATE:
+                setTitle('Update category');
+                break;
+
+            default:
+                break;
+        }
+    }, [action, category.id]);
 
     function handleChange(e: { target: { name: string; value: string } }) {
         setValues((values) => ({
@@ -31,7 +63,7 @@ export default function DetailModal({ category, isOpen, onClose }: { category: C
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="max-w-sm overflow-hidden md:max-w-md lg:max-w-lg">
                 <DialogHeader className="flex flex-col gap-5">
-                    <DialogTitle>Detail new category</DialogTitle>
+                    <DialogTitle>{title}</DialogTitle>
                     <DialogDescription asChild>
                         <form className="flex flex-col gap-5 overflow-hidden">
                             <InputForm
@@ -41,7 +73,7 @@ export default function DetailModal({ category, isOpen, onClose }: { category: C
                                 handleChange={handleChange}
                                 usePlaceholder={true}
                                 value={values.name}
-                                isDisabled={true}
+                                isDisabled={disabled}
                             />
                             <TextareaForm
                                 name="description"
@@ -49,7 +81,7 @@ export default function DetailModal({ category, isOpen, onClose }: { category: C
                                 handleChange={handleChange}
                                 usePlaceholder={true}
                                 value={values.description}
-                                isDisabled={true}
+                                isDisabled={disabled}
                             />
                         </form>
                     </DialogDescription>
