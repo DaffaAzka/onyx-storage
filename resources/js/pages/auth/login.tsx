@@ -1,5 +1,5 @@
 import LoadingButton from '@/components/button_loading';
-import InputForm from '@/components/input_form';
+import InputForm from '@/components/input-form';
 import GuestLayout from '@/components/layouts/guest_layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link, router, usePage } from '@inertiajs/react';

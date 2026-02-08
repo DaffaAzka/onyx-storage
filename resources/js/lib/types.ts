@@ -16,6 +16,28 @@ export type Category = {
     updated_at: Date;
 };
 
+export type Item = {
+    id: number;
+    category_id: number;
+    user_id: number;
+    name: string;
+    code: string;
+    description: string | null;
+    status: 'fair' | 'damaged' | 'good';
+    quantity: number;
+    evailable_quantity: number;
+    image_path: string | null;
+    category?: Category;
+    user?: User;
+    created_at: Date;
+    updated_at: Date;
+};
+
+export type SelectItems = {
+    id: string | number;
+    name: string;
+};
+
 export interface PaginatedData<T> {
     data: T[];
     current_page: number;

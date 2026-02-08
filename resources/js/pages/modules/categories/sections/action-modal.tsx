@@ -1,6 +1,6 @@
 import LoadingButton from '@/components/button_loading';
-import InputForm from '@/components/input_form';
-import TextareaForm from '@/components/textarea_form';
+import InputForm from '@/components/input-form';
+import TextareaForm from '@/components/textarea-form';
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
 import { Actions, Category } from '@/lib/types';
 import { router, usePage } from '@inertiajs/react';

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -28,8 +29,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('/categories/{id}', [CategoryController::class, 'update']);
         Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
 
+        // Items Routes
+        Route::get('/items', [ItemController::class, 'index'])->name('items');
+        Route::post('/items', [ItemController::class, 'store']);
+        Route::patch('/items/{id}', [ItemController::class, 'update']);
+        Route::delete('/items/{id}', [ItemController::class, 'destroy']);
+
         // User Routes
-        
     });
 
 });
