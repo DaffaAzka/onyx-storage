@@ -1,6 +1,7 @@
 import LoadingButton from '@/components/button_loading';
 import InputFileForm from '@/components/input-file-form';
 import InputForm from '@/components/input-form';
+import InputNumberForm from '@/components/input-number-form';
 import SelectForm from '@/components/select-form';
 import TextareaForm from '@/components/textarea-form';
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
@@ -40,6 +41,7 @@ export default function ActionModal({
     const [disabled, setDisabled] = useState(false);
     const [title, setTitle] = useState('');
     const [loading, setLoading] = useState(false);
+    const [usedQuantity, setUsedQuantity] = useState(0);
 
     const conditions: SelectItems[] = [
         {
@@ -67,6 +69,7 @@ export default function ActionModal({
                 quantity: item.quantity,
                 evailable_quantity: item.evailable_quantity,
             });
+            setUsedQuantity(item.quantity - item.evailable_quantity);
             setPreview(item.image_path ?? '');
             setImageFile(null);
         }
@@ -91,10 +94,27 @@ export default function ActionModal({
     }, [action]);
 
     function handleChange(e: { target: { name: string; value: string } }) {
-        setValues((values) => ({
-            ...values,
-            [e.target.name]: e.target.value,
-        }));
+        const { name, value } = e.target;
+
+        if (name === 'quantity') {
+            const newQuantity = Number(value);
+
+            if (newQuantity < usedQuantity) {
+                toast.error(`Quantity cannot be less than ${usedQuantity} (used quantity)`);
+                return;
+            }
+
+            setValues((values) => ({
+                ...values,
+                quantity: newQuantity,
+                evailable_quantity: newQuantity - usedQuantity,
+            }));
+        } else {
+            setValues((values) => ({
+                ...values,
+                [name]: value,
+            }));
+        }
     }
 
     function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -245,25 +265,24 @@ export default function ActionModal({
                         />
 
                         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                            <InputForm
+                            <InputNumberForm
                                 name="quantity"
                                 text="Quantity Item"
-                                type="number"
                                 handleChange={handleChange}
                                 error={errors.quantity}
                                 usePlaceholder={false}
                                 value={values.quantity.toString()}
+                                min={values.quantity - values.evailable_quantity}
                                 isDisabled={disabled}
                             />
-                            <InputForm
+                            <InputNumberForm
                                 name="evailable_quantity"
                                 text="Available Quantity Item"
-                                type="number"
                                 handleChange={handleChange}
                                 error={errors.evailable_quantity}
                                 usePlaceholder={false}
                                 value={values.evailable_quantity.toString()}
-                                isDisabled={disabled}
+                                isDisabled={true}
                             />
                         </div>
 
@@ -276,7 +295,7 @@ export default function ActionModal({
                             isDisabled={disabled}
                             accept="image/*"
                             preview={preview}
-                            existingImage={!imageFile ? item.image_path ?? undefined : undefined}
+                            existingImage={!imageFile ? (item.image_path ?? undefined) : undefined}
                             onRemoveImage={handleRemoveImage}
                         />
 

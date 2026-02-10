@@ -180,7 +180,8 @@ export default function CreateModal({ categories }: { categories: SelectItems[] 
                                 handleChange={handleChange}
                                 error={errors.evailable_quantity}
                                 usePlaceholder={false}
-                                value={values.evailable_quantity.toString()}
+                                isDisabled={true}
+                                value={values.quantity.toString()}
                             />
                         </div>
                         <InputFileForm
