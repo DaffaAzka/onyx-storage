@@ -1,10 +1,18 @@
-import AuthLayout from '@/components/layouts/auth_layout';
+import AuthLayout from '@/components/layouts/auth-layout';
 import SelectForm from '@/components/select-form';
 import { Input } from '@/components/ui/input';
 import { Category, Item, PaginatedData } from '@/lib/types';
+import { useState } from 'react';
 import DataCards from './sections/data-cards';
+import { router } from '@inertiajs/react';
 
 export default function DahsboardPage({ items, categories }: { items: PaginatedData<Item>; categories: Category[] }) {
+    const [categoryId, setCategoryId] = useState('');
+
+    function handleSearchByCategories(e: string) {
+        setCategoryId(e);
+        router.get('/dashboard', { category_id: e }, { preserveState: true, preserveScroll: true });
+    }
     return (
         <AuthLayout title="Dashboard">
             <div className="flex flex-col gap-4">
@@ -15,8 +23,10 @@ export default function DahsboardPage({ items, categories }: { items: PaginatedD
                             items={categories}
                             name="search-by-category"
                             text="Filters by Category"
-                            handleChange={() => {}}
+                            handleChange={handleSearchByCategories}
+                            value={categoryId}
                             usePlaceholder={true}
+                            withAll={true}
                         />
                     </div>
                 </div>

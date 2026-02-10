@@ -1,4 +1,4 @@
-import GuestLayout from '@/components/layouts/guest_layout';
+import GuestLayout from '@/components/layouts/guest-layout';
 
 export default function Welcome() {
     return (

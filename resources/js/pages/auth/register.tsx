@@ -1,6 +1,6 @@
 import LoadingButton from '@/components/button_loading';
 import InputForm from '@/components/input-form';
-import GuestLayout from '@/components/layouts/guest_layout';
+import GuestLayout from '@/components/layouts/guest-layout';
 import { Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 

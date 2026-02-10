@@ -11,6 +11,7 @@ export default function SelectForm({
     usePlaceholder = false,
     value = null,
     isDisabled = false,
+    withAll = false,
 }: {
     name: string;
     text: string;
@@ -20,6 +21,7 @@ export default function SelectForm({
     value?: string | null;
     usePlaceholder?: boolean;
     isDisabled?: boolean;
+    withAll?: boolean;
 }) {
     return usePlaceholder ? (
         <Field aria-invalid={error != null} className="flex flex-col gap-3">
@@ -29,6 +31,7 @@ export default function SelectForm({
                         <SelectValue placeholder={text} />
                     </SelectTrigger>
                     <SelectContent>
+                        {withAll && <SelectItem value="all">All</SelectItem>}
                         {items.map((item) => (
                             <SelectItem key={item.id} value={item.id.toString()}>
                                 {item.name}

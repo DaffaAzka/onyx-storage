@@ -75,6 +75,10 @@ class AuthController extends Controller
             $query = $query->where('name', 'like', '%' . $request->search . '%')->orWhere('code', 'like', '%' . $request->search . '%')->orWhere('description', 'like', '%' . $request->search . '%');
         }
 
+        if ($request->has('category_id') && $request->category_id && $request->category_id != 'all') {
+            $query = $query->where('category_id', $request->category_id);
+        }
+
         $items = $query->paginate(10);
 
         $categories = Category::all();

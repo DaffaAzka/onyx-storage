@@ -1,4 +1,4 @@
-import AuthLayout from '@/components/layouts/auth_layout';
+import AuthLayout from '@/components/layouts/auth-layout';
 import PaginationComponent from '@/components/pagination';
 import { Input } from '@/components/ui/input';
 import type { Category, PaginatedData } from '@/lib/types';
