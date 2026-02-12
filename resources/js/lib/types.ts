@@ -15,6 +15,8 @@ export type Category = {
     user?: User;
     created_at: Date;
     updated_at: Date;
+
+    items?: Item[];
 };
 
 export type Item = {
@@ -28,6 +30,7 @@ export type Item = {
     quantity: number;
     evailable_quantity: number;
     image_path: string | null;
+    image_url: string | null;
     category?: Category;
     user?: User;
     created_at: Date;

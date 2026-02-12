@@ -19,6 +19,8 @@ class Item extends Model
         'code',
     ];
 
+    protected $appends = ['image_url'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -29,11 +31,11 @@ class Item extends Model
         return $this->belongsTo(User::class);
     }
 
-    protected function getImagePathAttribute($value)
+    public function getImageUrlAttribute()
     {
-        if ($value && !str_starts_with($value, '/')) {
-            return '/storage/' . $value;
+        if ($this->attributes['image_path']) {
+            return '/storage/' . $this->attributes['image_path'];
         }
-        return $value;
+        return null;
     }
 }

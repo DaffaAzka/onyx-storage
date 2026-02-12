@@ -86,7 +86,7 @@ export default function BorrowModal({ item, isOpen, onClose }: { item: Item; isO
                     </DialogHeader>
                     <div className="flex flex-col gap-5">
                         <div className="relative overflow-hidden rounded-lg">
-                            <img src={item.image_path ?? ''} alt={item.name} className="aspect-video w-full object-cover" />
+                            <img src={item.image_url ?? ''} alt={item.name} className="aspect-video w-full object-cover" />
                         </div>
 
                         <div className="flex flex-col gap-4">

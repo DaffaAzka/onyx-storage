@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Actions, Category } from '@/lib/types';
-import { InfoIcon, PencilIcon, TrashIcon } from 'lucide-react';
+import { MoreHorizontalIcon } from 'lucide-react';
 import { useState } from 'react';
 import ActionModal from './action-modal';
 
@@ -56,18 +57,29 @@ export default function DataTable({ categories }: { categories: Category[] }) {
                                     <TableCell>
                                         <div className="w-20 truncate lg:w-fit">{category.description}</div>
                                     </TableCell>
-                                    <TableCell>0</TableCell>
+                                    <TableCell>{category.items?.length}</TableCell>
                                     <TableCell className="hidden lg:table-cell">{category.user?.name ?? 'N/A'}</TableCell>
                                     <TableCell className="flex flex-row justify-end gap-2">
-                                        <Button variant="default" size="icon-sm" onClick={() => handleClick(category, true, Actions.UPDATE)}>
-                                            <PencilIcon />
-                                        </Button>
-                                        <Button variant="outline" size="icon-sm" onClick={() => handleClick(category, true, Actions.DETAIL)}>
-                                            <InfoIcon />
-                                        </Button>
-                                        <Button variant="destructive" size="icon-sm" onClick={() => handleClick(category, true, Actions.DELETE)}>
-                                            <TrashIcon />
-                                        </Button>
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <Button variant="ghost" size="icon" className="size-8">
+                                                    <MoreHorizontalIcon />
+                                                    <span className="sr-only">Open menu</span>
+                                                </Button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end">
+                                                <DropdownMenuItem onClick={() => handleClick(category, true, Actions.UPDATE)}>
+                                                    Update
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem onClick={() => handleClick(category, true, Actions.DETAIL)}>
+                                                    Detail
+                                                </DropdownMenuItem>
+                                                <DropdownMenuSeparator />
+                                                <DropdownMenuItem variant="destructive" onClick={() => handleClick(category, true, Actions.DELETE)}>
+                                                    Delete
+                                                </DropdownMenuItem>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
                                     </TableCell>
                                 </TableRow>
                             ))}

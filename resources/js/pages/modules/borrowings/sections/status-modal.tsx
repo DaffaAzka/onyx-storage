@@ -92,7 +92,7 @@ export default function StatusModal({
                             <h3 className="text-sm font-semibold text-gray-900">Item Details</h3>
                             <div className="space-y-3 rounded-lg bg-gray-50 p-4">
                                 <div className="overflow-hidden rounded-md bg-white">
-                                    <img src={value.borrowing?.item?.image_path ?? ''} alt="Item Preview" className="h-40 w-full object-contain" />
+                                    <img src={value.borrowing?.item?.image_url ?? ''} alt="Item Preview" className="h-40 w-full object-contain" />
                                 </div>
 
                                 <div>
@@ -129,7 +129,6 @@ export default function StatusModal({
                         <div className="space-y-4">
                             <h3 className="text-sm font-semibold text-gray-900">Borrowing Details</h3>
                             <div className="space-y-3 rounded-lg bg-gray-50 p-4">
-                                {/* Borrower Info */}
                                 <div className="flex items-center gap-2">
                                     <User className="h-4 w-4 text-gray-400" />
                                     <div className="flex-1">

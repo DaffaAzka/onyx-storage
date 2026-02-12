@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Category::with('user')->latest();
+        $query = Category::with(['user', 'items'])->latest();
 
         if ($request->has('search') && $request->search) {
             $query->where('name', 'like', '%' . $request->search . '%')->orWhere('description', 'like', '%' . $request->search . '%');

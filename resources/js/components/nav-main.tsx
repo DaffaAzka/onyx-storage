@@ -12,6 +12,7 @@ import {
     SidebarMenuSubButton,
     SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
+import { Link } from '@inertiajs/react';
 
 export function NavMain({
     items,
@@ -41,10 +42,10 @@ export function NavMain({
                         <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
                             <SidebarMenuItem>
                                 <SidebarMenuButton asChild tooltip={item.title} isActive={item.url === window.location.pathname}>
-                                    <a href={item.url}>
+                                    <Link href={item.url}>
                                         <item.icon />
                                         <span>{item.title}</span>
-                                    </a>
+                                    </Link>
                                 </SidebarMenuButton>
                                 {item.items?.length ? (
                                     <>
@@ -61,9 +62,9 @@ export function NavMain({
                                                     return (
                                                         <SidebarMenuSubItem key={subItem.title}>
                                                             <SidebarMenuSubButton asChild isActive={subItem.url === window.location.pathname}>
-                                                                <a href={subItem.url}>
+                                                                <Link href={subItem.url}>
                                                                     <span>{subItem.title}</span>
-                                                                </a>
+                                                                </Link>
                                                             </SidebarMenuSubButton>
                                                         </SidebarMenuSubItem>
                                                     );

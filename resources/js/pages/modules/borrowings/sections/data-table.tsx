@@ -2,10 +2,11 @@ import SelectForm from '@/components/select-form';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { authorizations, formatDate, getStatusLabel } from '@/lib/helpers';
 import { Borrowing, SelectItems } from '@/lib/types';
-import { BrushCleaning, InfoIcon } from 'lucide-react';
+import { BrushCleaning, MoreHorizontalIcon } from 'lucide-react';
 import { useState } from 'react';
 import StatusModal from './status-modal';
 
@@ -127,8 +128,8 @@ export default function DataTable({ borrowings, userRole }: { borrowings: Borrow
                                         <TableCell className="font-medium">{index + 1}</TableCell>
                                         <TableCell>
                                             <img
-                                                className="h-8 w-8 object-cover"
-                                                src={borrowing.item?.image_path ?? ''}
+                                                className="h-10 w-10 object-cover"
+                                                src={borrowing.item?.image_url ?? ''}
                                                 alt={borrowing.item?.name ?? 'N/A'}
                                             />
                                         </TableCell>
@@ -158,9 +159,31 @@ export default function DataTable({ borrowings, userRole }: { borrowings: Borrow
                                             )}
                                         </TableCell>
                                         <TableCell className="flex flex-row justify-end gap-2">
-                                            <Button variant="default" size="icon-sm">
-                                                <InfoIcon />
-                                            </Button>
+                                            <DropdownMenu>
+                                                <DropdownMenuTrigger asChild>
+                                                    <Button variant="ghost" size="icon" className="size-8">
+                                                        <MoreHorizontalIcon />
+                                                        <span className="sr-only">Open menu</span>
+                                                    </Button>
+                                                </DropdownMenuTrigger>
+                                                <DropdownMenuContent align="end">
+                                                    {borrowing.status === 'pending' || borrowing.status === 'rejected' ? (
+                                                        <>
+                                                            <DropdownMenuItem onClick={() => {}}>Update</DropdownMenuItem>
+                                                            <DropdownMenuItem onClick={() => {}}>Detail</DropdownMenuItem>
+
+                                                            <DropdownMenuSeparator />
+                                                            <DropdownMenuItem variant="destructive" onClick={() => {}}>
+                                                                Delete
+                                                            </DropdownMenuItem>
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <DropdownMenuItem onClick={() => {}}>Detail</DropdownMenuItem>
+                                                        </>
+                                                    )}
+                                                </DropdownMenuContent>
+                                            </DropdownMenu>
                                         </TableCell>
                                     </TableRow>
                                 ))}

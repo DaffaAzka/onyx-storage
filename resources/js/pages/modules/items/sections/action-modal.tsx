@@ -70,7 +70,7 @@ export default function ActionModal({
                 evailable_quantity: item.evailable_quantity,
             });
             setUsedQuantity(item.quantity - item.evailable_quantity);
-            setPreview(item.image_path ?? '');
+            setPreview(item.image_url ?? '');
             setImageFile(null);
         }
     }, [item.id]);
@@ -131,7 +131,7 @@ export default function ActionModal({
 
     function handleRemoveImage() {
         setImageFile(null);
-        setPreview(item.image_path ?? '');
+        setPreview(item.image_url ?? '');
     }
 
     function handleSubmit(e: any) {
@@ -295,7 +295,7 @@ export default function ActionModal({
                             isDisabled={disabled}
                             accept="image/*"
                             preview={preview}
-                            existingImage={!imageFile ? (item.image_path ?? undefined) : undefined}
+                            existingImage={!imageFile ? (item.image_url ?? undefined) : undefined}
                             onRemoveImage={handleRemoveImage}
                         />
 

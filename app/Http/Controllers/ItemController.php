@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Item;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -14,11 +15,12 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        //
         $query = Item::with(['category', 'user'])->latest();
 
         if ($request->has('search') && $request->search) {
-            $query = $query->where('name', 'like', '%' . $request->search . '%')->orWhere('code', 'like', '%' . $request->search . '%')->orWhere('description', 'like', '%' . $request->search . '%');
+            $query = $query->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('code', 'like', '%' . $request->search . '%')
+                ->orWhere('description', 'like', '%' . $request->search . '%');
         }
 
         $items = $query->paginate(10);
@@ -92,7 +94,6 @@ class ItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
         $request->validate([
             'name' => 'required|string|unique:items,name,' . $id,
             'description' => 'required|string',
@@ -110,7 +111,7 @@ class ItemController extends Controller
         if ($request->hasFile('image_path')) {
             $item = Item::find($id);
             if ($item->image_path) {
-                \Storage::disk('public')->delete($item->image_path);
+                Storage::disk('public')->delete($item->image_path);
             }
             $file = $request->file('image_path');
             $path = $file->store('items', 'public');

@@ -28,7 +28,7 @@ export default function DataCards({ items }: { items: Item[] }) {
                 {items.map((item) => (
                     <Card key={item.id} className="relative mx-auto flex w-full flex-col pt-0">
                         <img
-                            src={item.image_path || '/images/default-event.jpg'}
+                            src={item.image_url || '/images/default-event.jpg'}
                             alt="Event cover"
                             className="relative z-20 aspect-video w-full rounded-tl-xl rounded-tr-xl object-cover brightness-80 dark:brightness-80"
                         />
